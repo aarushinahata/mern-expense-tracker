@@ -3,12 +3,12 @@ import DashboardLayout from '../../components/layouts/DashboardLayout'
 import { useUserAuth } from '../../hooks/useUserAuth';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
-import ExpenseOverview from '../../../Expense/ExpenseOverview';
-import AddExpenseForm from '../../../Expense/AddExpenseForm';
+import ExpenseOverview from '../../Expense/ExpenseOverview';
+import AddExpenseForm from '../../Expense/AddExpenseForm';
 import Modal from '../../components/Modal';
 import { API_PATHS } from '../../utils/apiPaths';
 import DeleteAlert from '../../components/DeleteAlert';
-import ExpenseList from '../../../Expense/ExpenseList';
+import ExpenseList from '../../Expense/ExpenseList';
 import toast from 'react-hot-toast';
 
 const Expense = () =>{

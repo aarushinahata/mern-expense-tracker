@@ -1,5 +1,5 @@
 import React from 'react'
-import CustomPieChart from '../../Charts/CustomPieChart'
+import CustomPieChart from '../Charts/CustomPieChart'
 
 const COLORS = ["#b9ea0e", "#2196F3", "#F44336"]
 

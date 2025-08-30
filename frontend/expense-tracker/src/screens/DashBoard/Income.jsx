@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import InfoCard from '../../Cards/InfoCard';
-import IncomeOverView from '../../../Income/IncomeOverView';
+import IncomeOverView from '../../Income/IncomeOverView';
 import Modal from '../../components/Modal';
-import AddIncomeForm from '../../../Income/AddIncomeForm';
+import AddIncomeForm from '../../Income/AddIncomeForm';
 import toast from 'react-hot-toast';
-import IncomeList from '../../../Income/IncomeList';
+import IncomeList from '../../Income/IncomeList';
 import DeleteAlert from '../../components/DeleteAlert';
 
 
