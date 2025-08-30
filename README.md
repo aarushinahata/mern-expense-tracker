@@ -14,7 +14,7 @@ A modern, full-stack expense tracker web app to seamlessly manage your income an
 - 🔒 Secure authentication (JWT)
 - ☁️ Image uploads via Cloudinary
 - 📱 Fully responsive design
-- 🌐 Deployed on Vercel (backend & frontend)
+- 🌐 Ready for Vercel deployment
 
 ---
 
@@ -22,7 +22,7 @@ A modern, full-stack expense tracker web app to seamlessly manage your income an
 
 - **Frontend:** React, Vite, Tailwind CSS, Recharts, Axios
 - **Backend:** Node.js, Express, MongoDB (Mongoose), JWT, Multer, Cloudinary
-- **Deployment:** Vercel
+- **Deployment:** Vercel (Backend & Frontend)
 
 ---
 
@@ -30,7 +30,7 @@ A modern, full-stack expense tracker web app to seamlessly manage your income an
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/your-username/mern-expense-tracker.git
+git clone https://github.com/aarushinahata/mern-expense-tracker.git
 cd MERN-Expense-Tracker-master
 ```
 
@@ -38,7 +38,7 @@ cd MERN-Expense-Tracker-master
 Create `.env` files in both `backend/` and `frontend/expense-tracker/`:
 
 #### backend/.env
-```
+```env
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
@@ -49,18 +49,19 @@ PORT=5000
 ```
 
 #### frontend/expense-tracker/.env
-```
+```env
 VITE_REACT_APP_BACKEND_BASEURL=http://localhost:5000
 ```
 
 ### 3. Install Dependencies
 ```bash
 # Backend
-yarn install # or npm install (in backend/)
+cd backend
+npm install
 
 # Frontend
-cd frontend/expense-tracker
-yarn install # or npm install
+cd ../frontend/expense-tracker
+npm install
 ```
 
 ### 4. Run Locally
@@ -71,6 +72,50 @@ npm start
 # Start frontend (in frontend/expense-tracker/)
 npm run dev
 ```
+
+---
+
+## 🚀 Deploy to Vercel
+
+### Step 1: Deploy Backend
+1. Go to [vercel.com](https://vercel.com) → **New Project**
+2. Import your GitHub repository
+3. **Configure:**
+   - **Root Directory:** `backend`
+   - **Framework Preset:** Node.js
+   - **Build Command:** (leave empty)
+   - **Output Directory:** (leave empty)
+
+4. **Environment Variables:**
+   ```env
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+   CLOUDINARY_API_KEY=your_cloudinary_api_key
+   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+   CLIENT_URL=https://your-frontend-url.vercel.app
+   ```
+
+5. **Deploy** → Copy the backend URL
+
+### Step 2: Deploy Frontend
+1. **New Project** → Same repository
+2. **Configure:**
+   - **Root Directory:** `frontend/expense-tracker`
+   - **Framework Preset:** Vite
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+
+3. **Environment Variable:**
+   ```env
+   VITE_REACT_APP_BACKEND_BASEURL=https://your-backend-url.vercel.app
+   ```
+
+4. **Deploy** → Copy the frontend URL
+
+### Step 3: Update URLs
+- Update `CLIENT_URL` in backend to your frontend URL
+- Redeploy both projects
 
 ---
 
@@ -99,11 +144,71 @@ All endpoints are prefixed with `/api/v1/`
 ### Dashboard
 - `GET    /dashboard` — Get dashboard data (auth required)
 
+### Health Check
+- `GET    /health` — API health check
+- `GET    /test` — Test endpoint
+
 ---
 
-## 📦 Deployment
-- **Vercel:** Both backend and frontend are ready for Vercel deployment. See `vercel.json` in each folder.
-- **Cloudinary:** Used for image uploads. Set your Cloudinary credentials in backend `.env`.
+## 📦 Project Structure
+
+```
+MERN-Expense-Tracker-master/
+├── backend/                    # Backend API (Node.js/Express)
+│   ├── api/                   # Vercel serverless functions
+│   ├── config/                # Database configuration
+│   ├── controllers/           # Route controllers
+│   ├── middleware/            # Custom middleware
+│   ├── models/                # MongoDB models
+│   ├── routes/                # API routes
+│   ├── utils/                 # Utility functions
+│   ├── server.js              # Main server file
+│   ├── package.json           # Backend dependencies
+│   └── vercel.json            # Vercel configuration
+│
+└── frontend/
+    └── expense-tracker/        # Frontend App (React/Vite)
+        ├── src/               # React components
+        ├── public/            # Static assets
+        ├── package.json       # Frontend dependencies
+        └── vercel.json        # Vercel configuration
+```
+
+---
+
+## 🔧 Environment Variables
+
+### Backend (.env)
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `MONGO_URI` | MongoDB connection string | ✅ |
+| `JWT_SECRET` | JWT signing secret | ✅ |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name | ✅ |
+| `CLOUDINARY_API_KEY` | Cloudinary API key | ✅ |
+| `CLOUDINARY_API_SECRET` | Cloudinary API secret | ✅ |
+| `CLIENT_URL` | Frontend URL (for CORS) | ✅ |
+| `PORT` | Server port (default: 5000) | ❌ |
+
+### Frontend (.env)
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `VITE_REACT_APP_BACKEND_BASEURL` | Backend API URL | ✅ |
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+1. **CORS Errors:** Ensure `CLIENT_URL` matches your frontend URL exactly
+2. **Build Failures:** Check Node.js version (>=18.0.0)
+3. **Environment Variables:** Redeploy after adding new variables
+4. **MongoDB Connection:** Verify connection string and network access
+
+### Health Check
+Test your backend deployment:
+```bash
+curl https://your-backend-url.vercel.app/api/health
+```
 
 ---
 
