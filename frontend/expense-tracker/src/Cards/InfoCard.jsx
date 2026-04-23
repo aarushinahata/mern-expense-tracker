@@ -2,13 +2,13 @@ import React from 'react'
 
 const InfoCard = ({icon, label,value, color}) => {
   return (
-    <div className='flex gap-6 bg-[#6a994e] hover:bg-[#386641] hover:scale-102 transition duration-500 p-6 rounded-2xl shadow-md shadow-gray-100 border border-green-200/50 '>
-        <div className={`w-14 h-14 flex items-center justify-center text-[26px] text-white ${color} rounded-xl drop-shadow-2xl hover:scale-115 transition duration-500`}>
+    <div className='card flex gap-6 items-center hover:-translate-y-2 cursor-default'>
+        <div className={`w-16 h-16 flex items-center justify-center text-[28px] text-white ${color} rounded-2xl drop-shadow-lg shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)] transition-transform duration-500 group-hover:scale-110`}>
             {icon}
         </div>
         <div>
-            <h6 className='text-white'>{label}</h6>
-            <span className='font-semibold text-white tracking-widest'>₱ {value}</span>
+            <h6 className='text-slate-500 text-[13px] font-semibold uppercase tracking-wider mb-1'>{label}</h6>
+            <span className='text-2xl font-bold text-slate-800 tracking-tight'>₱ {value}</span>
         </div>
     </div> 
   )

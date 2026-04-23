@@ -8,6 +8,7 @@ import FinanceOverview from '../../Cards/FinanceOverview';
 import RecentTransactions from '../../Cards/RecentTransactions';
 import RecentIncome from '../../Cards/RecentIncome';
 import Last30DaysExpenses from '../../Cards/Last30DaysExpenses';
+import ExpenseTransactions from '../../Cards/ExpenseTransactions';
 import TransactionInfoCard from '../../Cards/TransactionInfoCard';
 import InfoCard from '../../Cards/InfoCard';
 import Last60daysIncomeChart from '../../Charts/Last60daysIncomeChart';

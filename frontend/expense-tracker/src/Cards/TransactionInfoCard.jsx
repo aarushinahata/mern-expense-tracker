@@ -13,8 +13,8 @@ const TransactionInfoCard = ({icon, title, date, amount, type, hideDeleteBtn, on
 
 
   return (
-    <div className='group relative flex items-center gap-4 mt-2 p-3 rounded-lg hover:bg-gray-100/60'>
-        <div className='w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-gray-100 rounded-lg'>
+    <div className='group relative flex items-center gap-4 mt-2 p-3.5 rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-default'>
+        <div className='w-12 h-12 flex items-center justify-center text-xl text-emerald-600 bg-emerald-50 rounded-xl shadow-[inset_0_-2px_4px_rgba(0,0,0,0.05)]'>
             {icon ? (
                 <img src={icon} alt = {title} className='w-6 h-6 hover:scale-120 transition duration-300'/>
             ):(

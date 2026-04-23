@@ -1,6 +1,5 @@
 import React from 'react'
-import card2 from '../../assets/images/card2.png'
-import { FaMoneyBillTrendUp } from "react-icons/fa6"
+import bgImage from '../../assets/images/finance_auth_bg.png'
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 import { CarouselDefault } from './CarouselDefault';
 
@@ -12,15 +11,12 @@ function AuthLayout({children}) {
         </div>
 
    
-      <div class="background" className='hidden md:block w-[40vw] h-screen bg-[#a7c957] bg-auth-bg-img bg-cover bg-no-repeat bg-center 
-      overflow-hidden p-8 relative '>
-        <span class="ball"></span>
-        <span class="ball"></span>
-        <span class="ball"></span>
-        <span class="ball"></span>
-        <span class="ball"></span>
-        <span class="ball"></span>
-          <div className='w-[60%] m-auto'>
+      <div 
+        className='hidden md:flex w-[40vw] h-screen bg-cover bg-no-repeat bg-center overflow-hidden p-8 relative flex-col justify-center items-center shadow-[inset_10px_0_30px_rgba(0,0,0,0.1)]'
+        style={{ backgroundImage: `url(${bgImage})` }}
+      >
+        <div className='absolute inset-0 bg-emerald-900/10 backdrop-blur-[2px] z-0'></div>
+          <div className='w-4/5 z-10'>
             <CarouselDefault/>
           </div>   
         </div>

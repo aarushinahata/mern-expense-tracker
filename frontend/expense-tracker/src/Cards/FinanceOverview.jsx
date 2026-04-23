@@ -1,7 +1,7 @@
 import React from 'react'
 import CustomPieChart from '../Charts/CustomPieChart'
 
-const COLORS = ["#b9ea0e", "#2196F3", "#F44336"]
+const COLORS = ["#10b981", "#8b5cf6", "#f43f5e"] // Emerald, Violet, Rose
 
 
 
@@ -14,7 +14,7 @@ const FinanceOverview = ({totalBalance, totalIncome, totalExpense}) => {
     ]
 
   return (
-    <div className='card bg-gradient-to-r from-[#f2e8cf] via-[#a7c957] to-[#a7c957] animated-background'>
+    <div className='card'>
         <div className='flex items-center justify-between'>
             <h5 className='text-lg'>Financial Overview</h5>
         </div>
