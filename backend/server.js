@@ -17,10 +17,9 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "*",  // Allow any origin if CLIENT_URL isn't set
+    origin: true, // Specific origin is better, 'true' reflects the request origin
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
   })
 );
 

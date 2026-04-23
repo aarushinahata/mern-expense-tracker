@@ -17,69 +17,72 @@ function SignUp() {
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const  { updateUser } = useContext(UserContext);
-
+  const { updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        
-        let profileImageUrl = "";
+    let profileImageUrl = "";
 
-        if(!fullName) {
-          setError("Please enter your name");
-          return;
-        }
+    if (!fullName) {
+      setError("Please enter your name");
+      return;
+    }
 
-        if(!validateEmail((email))){
-          setError("Please enter a valid email address.");
-          return;
-        }
-    
-        if(!password){
-          setError("Incorrect Password");
-          return;
-        }
-    
-        setError("");
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
 
-        //api call
+    if (!password) {
+      setError("Please enter a password");
+      return;
+    }
 
+    setError("");
+    setLoading(true);
 
-        try{
-          //upload image
-          if (profilePic) {
-            const imgUploadRes = await uploadImage(profilePic);
-            profileImageUrl = imgUploadRes.imageUrl || "";
-          }
-          const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER,{
-              fullName,
-              email,
-              password,
-              profileImageUrl
-          });
+    try {
+      //upload image
+      if (profilePic) {
+        console.log("Uploading profile picture...");
+        const imgUploadRes = await uploadImage(profilePic);
+        profileImageUrl = imgUploadRes.imageUrl || "";
+      }
 
-          const {token, user} = response.data;
+      console.log("Saving user registration...");
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+        fullName,
+        email,
+        password,
+        profileImageUrl,
+      });
 
-          if (token) {
-            localStorage.setItem("token", token);
-            updateUser({
-              name: user.fullName,
-              email: user.email,
-              profileImageUrl: user.profileImageUrl,
-            });
-            navigate("/home")
-          }
-        }catch(error){
-          if(error.response && error.response.data.message){
-            setError(error.response.data.message);
-          } else{
-            setError("Something went wrong. Please try again.")
-          }
+      const { token, user } = response.data;
 
-        }
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUser({
+          name: user.fullName,
+          email: user.email,
+          profileImageUrl: user.profileImageUrl,
+        });
+        console.log("Signup success!");
+        navigate("/home");
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -116,11 +119,15 @@ function SignUp() {
               />
             </div>
           </div>
-          
+
           {error && <p className='text-rose-500 text-[13px] font-medium mb-4'>{error}</p>}
-          
-          <button type="submit" className='btn-primary mt-2'>
-            Sign Up
+
+          <button 
+            type="submit" 
+            className={`btn-primary mt-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+            disabled={loading}
+          >
+            {loading ? 'Creating Account...' : 'Sign Up'}
           </button>
 
           <p className='text-[14px] text-slate-600 mt-6 text-center'>
