@@ -5,8 +5,8 @@ import { CarouselDefault } from './CarouselDefault';
 
 function AuthLayout({children}) {
   return (
-    <div className='flex'>
-        <div className='w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12'> 
+    <div className='flex flex-col md:flex-row min-h-screen'>
+        <div className='w-full md:w-[60vw] px-8 md:px-12 py-12 flex items-center justify-center'> 
         {children}
         </div>
 

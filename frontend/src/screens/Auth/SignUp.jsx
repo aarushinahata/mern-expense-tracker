@@ -65,8 +65,12 @@ function SignUp() {
 
           if (token) {
             localStorage.setItem("token", token);
-            updateUser(user);
-            navigate("/login")
+            updateUser({
+              name: user.fullName,
+              email: user.email,
+              profileImageUrl: user.profileImageUrl,
+            });
+            navigate("/home")
           }
         }catch(error){
           if(error.response && error.response.data.message){
@@ -79,55 +83,55 @@ function SignUp() {
   }
 
   return (
-    
-      <div className=' w-full lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center items-center mx-auto'>
-        <h2 className=' mt-20 text-xl font-semibold text-black'>Create An Account</h2>
-        <p className='text-xs text-slate-700 mt-[5px] mb-6'>Enter your details below</p>
+    <AuthLayout>
+      <div className='w-full max-w-lg flex flex-col justify-center'>
+        <h2 className='text-2xl font-bold text-slate-800 tracking-tight'>Create An Account</h2>
+        <p className='text-sm text-slate-500 mt-2 mb-8'>Enter your details below to get started</p>
 
-        <form onSubmit={handleSignup} className='w-full max-w-2xl'>
+        <form onSubmit={handleSignup} className='w-full'>
+          <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
 
-          <ProfilePhotoSelector image={profilePic} setImage = {setProfilePic}/>
-
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 m-3 '>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 my-6'>
             <Input
-            value = {fullName}
-            onChange = {({ target }) => setFullName(target.value)}
-            label = "Full Name"
-            placeholder="John Doe"
-            type="text"
+              value={fullName}
+              onChange={({ target }) => setFullName(target.value)}
+              label="Full Name"
+              placeholder="John Doe"
+              type="text"
             />
             <Input
-          value = {email}
-          onChange = {({ target }) => setEmail(target.value)}
-          label = "Email Address"
-          placeholder="sample@gmail.com"
-          type="text"
-          />
-          <div className='col-span-2'>
-            <Input
-            value = {password}
-            onChange = {({ target }) => setPassword(target.value)}
-            label = "Password"
-            placeholder="Enter your password"
-            type="password"
+              value={email}
+              onChange={({ target }) => setEmail(target.value)}
+              label="Email Address"
+              placeholder="sample@gmail.com"
+              type="text"
             />
+            <div className='col-span-full'>
+              <Input
+                value={password}
+                onChange={({ target }) => setPassword(target.value)}
+                label="Password"
+                placeholder="Enter your password"
+                type="password"
+              />
+            </div>
           </div>
-          </div>
-          {error && <p className='text-red-500 text-xs pb-2.5 '>{error}</p>}
-                    <button type = "submit" className='btn-primary ' >
-                      Sign Up
-                    </button>
           
-                    <p className='text-[13px] text-slate-800 mt-3'>
-                      Already have an account?{" "}
-                      <Link className='font-medium text-primary underline' to="/login" >
-                      Login
-                      </Link>
-                    </p>
+          {error && <p className='text-rose-500 text-[13px] font-medium mb-4'>{error}</p>}
+          
+          <button type="submit" className='btn-primary mt-2'>
+            Sign Up
+          </button>
+
+          <p className='text-[14px] text-slate-600 mt-6 text-center'>
+            Already have an account?{" "}
+            <Link className='font-semibold text-emerald-600 hover:text-emerald-700 underline underline-offset-4 transition-colors' to="/login">
+              Login
+            </Link>
+          </p>
         </form>
-
       </div>
-
+    </AuthLayout>
   )
 }
 
